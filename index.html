@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task Prize Arcade</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <section class="task-setup" id="setupPanel" aria-labelledby="setupTitle">
+      <div class="marquee" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span><span></span>
+      </div>
+      <div class="setup-copy">
+        <p class="eyebrow">Insert tasks to play</p>
+        <h1 id="setupTitle">Task Prize Arcade</h1>
+        <p class="intro">Build the task list, then let the claw machine, coins, and prize wheel decide the next move.</p>
+      </div>
+
+      <form class="task-form" id="taskForm">
+        <label for="taskInput">Task name</label>
+        <div class="input-row">
+          <input id="taskInput" type="text" autocomplete="off" placeholder="Example: Finish math worksheet">
+          <button type="submit">Add Task</button>
+        </div>
+      </form>
+
+      <div class="setup-list" aria-live="polite">
+        <h2>Task Tickets</h2>
+        <ul id="setupTaskList"></ul>
+      </div>
+
+      <button class="start-button" id="startButton" type="button" disabled>Start Arcade</button>
+    </section>
+
+    <section class="arcade hidden" id="arcadePanel" aria-label="Task arcade">
+      <header class="scoreboard">
+        <div>
+          <p class="label">Coins</p>
+          <strong id="coinCount">3</strong>
+        </div>
+        <div>
+          <p class="label">Tasks Done</p>
+          <strong><span id="doneCount">0</span>/<span id="totalCount">0</span></strong>
+        </div>
+        <div class="progress-wrap" aria-label="Task completion progress">
+          <div class="progress-track">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+          <strong id="progressText">0%</strong>
+        </div>
+      </header>
+
+      <section class="current-task-panel">
+        <p class="label">Now Playing</p>
+        <h2 id="currentTask">Spin the wheel to choose the first task.</h2>
+        <div class="task-actions">
+          <button id="completeTaskButton" type="button" disabled>Complete Task +2 Coins</button>
+          <button id="skipTaskButton" type="button" disabled>Park It</button>
+        </div>
+      </section>
+
+      <div class="machine-grid">
+        <section class="claw-card" aria-labelledby="clawTitle">
+          <div class="cabinet-top">
+            <span class="bulb"></span><span class="bulb"></span><span class="bulb"></span><span class="bulb"></span>
+          </div>
+          <h2 id="clawTitle">Coin Claw</h2>
+          <div class="claw-window" id="clawWindow">
+            <div class="glass-shine" aria-hidden="true"></div>
+            <div class="back-panel" aria-hidden="true"></div>
+            <div class="rail"></div>
+            <div class="claw" id="claw">
+              <span></span><span></span><span></span>
+            </div>
+            <div class="prizes" id="prizes" aria-hidden="true"></div>
+            <div class="prize-chute" aria-hidden="true">PRIZE DROP</div>
+          </div>
+          <div class="machine-controls">
+            <div class="claw-controls" aria-label="Claw machine controls">
+              <button id="moveLeftButton" type="button" aria-label="Move claw left">◀</button>
+              <button id="dropClawButton" type="button">Drop -1 Coin</button>
+              <button id="moveRightButton" type="button" aria-label="Move claw right">▶</button>
+            </div>
+            <p id="clawMessage" aria-live="polite">The claw is cheerful, suspicious, and ready.</p>
+          </div>
+        </section>
+
+        <section class="wheel-card" aria-labelledby="wheelTitle">
+          <h2 id="wheelTitle">Task Wheel</h2>
+          <div class="wheel-wrap">
+            <div class="pointer" aria-hidden="true"></div>
+            <div class="wheel" id="wheel"></div>
+            <div class="wheel-center">TASK</div>
+          </div>
+          <button id="spinButton" type="button">Spin for Task</button>
+          <p id="wheelMessage" aria-live="polite">Spin when ready for the next ticket.</p>
+        </section>
+
+        <section class="ticket-card" aria-labelledby="ticketTitle">
+          <h2 id="ticketTitle">Task Tickets</h2>
+          <ul class="arcade-task-list" id="arcadeTaskList"></ul>
+        </section>
+      </div>
+
+      <section class="win-panel hidden" id="winPanel" aria-live="polite">
+        <p class="eyebrow">Jackpot</p>
+        <h2>All tasks complete.</h2>
+        <p>The board is clear and the arcade queue is empty.</p>
+        <button id="resetButton" type="button">Play Again</button>
+      </section>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
